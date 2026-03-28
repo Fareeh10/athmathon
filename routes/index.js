@@ -10,16 +10,26 @@ router.get('/login', function(req, res, next) {
   res.render('login', { home: false });
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', function(req, res) {
   const { username } = req.body;
-  // Here you would normally validate the username and password
-  // For this example, we'll just redirect to the home page
+  if (username !== "fareeh") {
+    return res.send(`
+      <script>
+        alert("Invalid username or password");
+        window.location.href = "/login";
+      </script>
+    `);
+  }
   res.redirect('/home');
 });
 
+
 router.get('/home', function(req, res, next) {
-  res.render('home', { home: true } );
+  res.render('home', { home: true, user: { name: "Fareeh" } } );
 });
 
-
+router.get('/course',   function(req, res, next) {
+  const name = req.query.name;
+  res.render('courses', { home: true, courseName:name } );
+});
 module.exports = router;

@@ -1,6 +1,6 @@
 const carouselData = [
+    { title: "UI/UX Design Masterclass", desc: "Build stunning user interfaces today.", img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000" },
     { title: "AI & Machine Learning", desc: "Master the future with Google-certified programs.", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000" },
-    { title: "UI/UX Design Masterclass", desc: "Build stunning user interfaces today.", img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000" }
 ];
 
 const enrolled = [
@@ -11,7 +11,9 @@ const enrolled = [
 const recommended = [
     { title: "Cloud Computing", rating: 4.8, tag: "Best Seller", img: "/images/cloud.png" },
     { title: "Python for Data", rating: 4.9, tag: "Recommended", img: "/images/python.png" },
-    { title: "Digital Marketing", rating: 4.5, tag: "Trending", img: "/images/digital-marketing.png" }
+    { title: "Digital Marketing", rating: 4.5, tag: "Trending", img: "/images/digital-marketing.png" },
+    { title: "Fullstack Web Dev", rating: 4.9, tag: "Relevant" ,img: "/images/fullstack.png"},
+    { title: "Machine Learning",rating: 4.0,tag: "Relevant" ,img: "/images/machinelearning.png" }
 ];
 
 const jobs = [
@@ -22,17 +24,12 @@ const jobs = [
 let currentSlide = 0;
 
 function renderUI() {
-    // Carousel
-    document.getElementById('carousel-container').innerHTML = carouselData.map((item, idx) => `
-        <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'}">
-            <img src="${item.img}" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/60 flex items-center px-12 text-white">
-                <div><h2 class="text-4xl font-bold">${item.title}</h2><p class="mt-2">${item.desc}</p></div>
-            </div>
-        </div>
-    `).join('');
+    
 
     // Enrolled
+    if(document.getElementById('continue-learning-grid')){
+
+        
     document.getElementById('continue-learning-grid').innerHTML = enrolled.map(c => `
         <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden border group cursor-pointer">
 
@@ -68,13 +65,17 @@ function renderUI() {
                 </div>
 
                 <!-- CTA -->
-                <button class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                <button onclick="window.location.href='/course?name=${encodeURIComponent(c.name)}'" class="mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-sm">
                     Continue Learning →
                 </button>
 
             </div>
         </div>
     `).join('');
+    }
+    else{
+        return
+    }
 
     // Recommended
     document.getElementById('recommended-scroll').innerHTML = recommended.map(c => `
@@ -127,15 +128,31 @@ function renderUI() {
     //     </div>
     // `).join('');
 }
+function renderCarousel(){
+    // Carousel
+    if(document.getElementById('carousel-container')){
+        document.getElementById('carousel-container').innerHTML = carouselData.map((item, idx) => `
+            <div class="carousel-item absolute inset-0 transition-opacity duration-1000 ${idx === currentSlide ? 'opacity-100' : 'opacity-0'}">
+                <img src="${item.img}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/60 flex items-center px-12 text-white">
+                    <div><h2 class="text-4xl font-bold">${item.title}</h2><p class="mt-2">${item.desc}</p></div>
+                </div>
+            </div>
+        `).join('');
+    }
 
-function nextSlide() { currentSlide = (currentSlide + 1) % carouselData.length; renderUI(); }
-function prevSlide() { currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length; renderUI(); }
+    else{
+        return
+    }   
+}
 
-document.getElementById('login-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    document.getElementById('login-page').classList.add('hidden');
-    document.getElementById('dashboard').classList.remove('hidden');
+
+function nextSlide() { currentSlide = (currentSlide + 1) % carouselData.length; renderCarousel(); }
+function prevSlide() { currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length; renderCarousel(); }
+
+document.addEventListener("DOMContentLoaded", () => {
     renderUI();
+    renderCarousel();
 });
 
 setInterval(nextSlide, 5000);
