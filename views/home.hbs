@@ -1,0 +1,39 @@
+<section class="bg-gray-50 text-gray-800 font-sans">
+
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" >
+       
+        <main class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+            <!-- Hero -->
+            <section class="relative h-[350px] rounded-2xl overflow-hidden shadow-lg bg-gray-900">
+                <div id="carousel-container" class="h-full relative"></div>
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 p-3 rounded-full text-white"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 p-3 rounded-full text-white"><i class="fas fa-chevron-right"></i></button>
+            </section>
+
+            <!-- Continue Learning -->
+            <section>
+                <h2 class="text-xl font-bold mb-4">Continue Learning</h2>
+                <div id="continue-learning-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </section>
+
+            <!-- Recommended -->
+            <section>
+                <h2 class="text-xl font-bold mb-4">Explore More Courses</h2>
+                <div class="flex-grow max-w-2xl relative border-2 border-gray-300 rounded-full">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Search courses..." class="w-full bg-gray-100 rounded-full py-2 pl-12 pr-4 outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <br>
+                <div id="recommended-scroll" class="flex gap-6 overflow-x-auto pb-4 scrollbar-hide"></div>
+            </section>
+
+            {{!-- <!-- Jobs -->
+            <section class="bg-blue-50 p-8 rounded-3xl">
+                <h2 class="text-xl font-bold mb-6">Job Opportunities</h2>
+                <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </section> --}}
+        </main>
+    </div>
+<section>

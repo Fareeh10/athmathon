@@ -8,9 +8,19 @@
         <nav class="nav-links">
             <a href="#">Home</a>
             <a href="#">About</a>
-            <a href="#">Courses</a>
+            {{#if home}}
+                <a href="#">Courses</a>
+            {{/if}}
         </nav>
 
-        <a class="signup-btn" href="/login">Login</a>
+        {{#if home}}
+            {{!-- <i class="fa-solid fa-circle-user" style="font-size: 29px; color: #007bff;"></i> --}}
+           
+            <div class="w-10 h-10 rounded-full bg-blue-100 overflow-hidden cursor-pointer border-2 border-black">
+                    <img src="/images/user.png" alt="Profile">
+                </div>
+        {{else}}
+            <a class="signup-btn" href="/login">Login</a>
+        {{/if}}
     </div>
 </header>
