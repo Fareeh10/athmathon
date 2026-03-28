@@ -3,9 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { engine } = require("express-handlebars");
 
 var indexRouter = require('./routes/index');
 var app = express();
+
+app.engine('hbs', engine({
+  extname: '.hbs',
+  defaultLayout: 'layout',  
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir: path.join(__dirname, 'views/partials')
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
